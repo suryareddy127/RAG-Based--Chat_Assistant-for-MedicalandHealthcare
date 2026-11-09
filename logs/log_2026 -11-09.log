@@ -1,0 +1,57 @@
+2026-11-09 11:13:34,011 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.4:5000
+2026-11-09 11:13:34,012 - INFO - [33mPress CTRL+C to quit[0m
+2026-11-09 11:14:08,466 - INFO - 127.0.0.1 - - [09/Nov/2026 11:14:08] "GET / HTTP/1.1" 200 -
+2026-11-09 11:14:09,583 - INFO - 127.0.0.1 - - [09/Nov/2026 11:14:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-11-09 11:14:30,361 - INFO - 127.0.0.1 - - [09/Nov/2026 11:14:30] "GET / HTTP/1.1" 200 -
+2026-11-09 11:14:31,421 - INFO - 127.0.0.1 - - [09/Nov/2026 11:14:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-11-09 11:14:34,875 - INFO - Loading vector store for context
+2026-11-09 11:14:34,875 - INFO - Loading FAISS vector store from disk.
+2026-11-09 11:14:34,876 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 11:14:37,888 - INFO - Loading vector store for context
+2026-11-09 11:14:37,889 - INFO - Loading FAISS vector store from disk.
+2026-11-09 11:14:37,890 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 11:15:00,046 - ERROR - 192.168.1.4 - - [09/Nov/2026 11:15:00] code 400, message Bad request version (']')
+2026-11-09 11:15:00,046 - INFO - 192.168.1.4 - - [09/Nov/2026 11:15:00] "[31m[1m\x16\x03\x01\x07f\x01\x00\x07b\x03\x03¾\x02ØE¬+oú\x80,\x0cñ\x16\x11( SC\x12ÀB¢\x93\x9f\x1c\x96\x1aÿ¸\x9dUê \x0f$æòÒ2³×\x10¦ÛS\x9dzzW\x9b²6\x8d¸º®±¸#BDæ[eØ\x00 êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06ù**\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00\x12\x00\x00ÿ\x01\x00\x01\x00\x00\x17\x00\x00\x00#\x00\x00\x00\x0d\x00\x1a\x00\x18\x1a\x1a\x09\x04\x09\x05\x09\x06\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04íúú\x00\x01\x00\x11ì\x04ÀAò\x06\x9d\x98¤iÅt\\A\x7fnÇd¢²\x82Ñð¼Û\x1c\x09»)V¬DfÝø\x1c][0m" 400 -
+2026-11-09 11:15:00,103 - ERROR - 192.168.1.4 - - [09/Nov/2026 11:15:00] code 400, message Bad request version ('^JVÚ\x9bè\x07:\x89\x8bb\x86Ye\x9b\x8a\x12Ø\x14ªlÇ\x1b\x16qåÛ\x00')
+2026-11-09 11:15:00,104 - INFO - 192.168.1.4 - - [09/Nov/2026 11:15:00] "[31m[1m\x16\x03\x01\x07Æ\x01\x00\x07Â\x03\x03\x00Ú\x83ÎGýÛÊ"\x17]$ûÞ\x9eHa|\x09ÃÜbgâ\x0bÂ\x09$\x99tâe `Éð\x94\x1e^JVÚ\x9bè\x07:\x89\x8bb\x86Ye\x9b\x8a\x12Ø\x14ªlÇ\x1b\x16qåÛ\x00 [0m" 400 -
+2026-11-09 11:15:02,413 - INFO - 192.168.1.4 - - [09/Nov/2026 11:15:02] "GET / HTTP/1.1" 200 -
+2026-11-09 11:15:03,291 - INFO - 192.168.1.4 - - [09/Nov/2026 11:15:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-11-09 11:15:08,500 - INFO - Loading vector store for context
+2026-11-09 11:15:08,500 - INFO - Loading FAISS vector store from disk.
+2026-11-09 11:15:08,501 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 11:15:18,901 - INFO - Use pytorch device_name: cpu
+2026-11-09 11:15:18,902 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 11:15:18,904 - INFO - Use pytorch device_name: cpu
+2026-11-09 11:15:18,904 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 11:15:18,905 - INFO - Use pytorch device_name: cpu
+2026-11-09 11:15:18,906 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 11:15:26,106 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-11-09 11:15:48,316 - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2026-11-09 11:15:55,613 - INFO - HuggingFace Embeddings initialized successfully.
+2026-11-09 11:15:55,613 - WARNING - FAISS database not found at vectorstore/db_faiss. Returning None.
+2026-11-09 11:15:55,613 - ERROR - Failed to make a QA chain | Error: Vector store not present or empty | Error: None | File: Unknown File | Line: Unknown Line | File: E:\final_project\mainfile\components\retreive.py | Line: 73
+2026-11-09 11:15:55,614 - INFO - 127.0.0.1 - - [09/Nov/2026 11:15:55] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 11:16:11,708 - INFO - HuggingFace Embeddings initialized successfully.
+2026-11-09 11:16:11,708 - WARNING - FAISS database not found at vectorstore/db_faiss. Returning None.
+2026-11-09 11:16:11,709 - ERROR - Failed to make a QA chain | Error: Vector store not present or empty | Error: None | File: Unknown File | Line: Unknown Line | File: E:\final_project\mainfile\components\retreive.py | Line: 73
+2026-11-09 11:16:11,710 - INFO - 127.0.0.1 - - [09/Nov/2026 11:16:11] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 11:16:12,355 - ERROR - Error initializing HuggingFace Embeddings: Cannot copy out of meta tensor; no data! Please use torch.nn.Module.to_empty() instead of torch.nn.Module.to() when moving module from meta to a different device.
+2026-11-09 11:16:12,362 - WARNING - FAISS database not found at vectorstore/db_faiss. Returning None.
+2026-11-09 11:16:12,362 - ERROR - Failed to make a QA chain | Error: Vector store not present or empty | Error: None | File: Unknown File | Line: Unknown Line | File: E:\final_project\mainfile\components\retreive.py | Line: 73
+2026-11-09 11:16:12,363 - INFO - 127.0.0.1 - - [09/Nov/2026 11:16:12] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 11:16:12,390 - INFO - 127.0.0.1 - - [09/Nov/2026 11:16:12] "GET / HTTP/1.1" 200 -
+2026-11-09 11:36:34,303 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.4:5000
+2026-11-09 11:36:34,339 - INFO - [33mPress CTRL+C to quit[0m
+2026-11-09 11:37:03,643 - INFO - 127.0.0.1 - - [09/Nov/2026 11:37:03] "GET / HTTP/1.1" 200 -
+2026-11-09 11:37:09,461 - INFO - Loading vector store for context
+2026-11-09 11:37:09,461 - INFO - Loading FAISS vector store from disk.
+2026-11-09 11:37:09,462 - WARNING - FAISS database not found at vectorstore/db_faiss. Run 'python -m mainfile.components.dataloader' to build it. Returning None.
+2026-11-09 11:37:09,462 - ERROR - Failed to make a QA chain | Error: Vector store not present or empty | Error: None | File: Unknown File | Line: Unknown Line | File: E:\final_project\mainfile\components\retreive.py | Line: 83
+2026-11-09 11:37:09,464 - INFO - 127.0.0.1 - - [09/Nov/2026 11:37:09] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 11:37:09,477 - INFO - 127.0.0.1 - - [09/Nov/2026 11:37:09] "GET / HTTP/1.1" 200 -
