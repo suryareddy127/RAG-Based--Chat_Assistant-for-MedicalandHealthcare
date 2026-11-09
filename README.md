@@ -41,7 +41,6 @@ An enterprise-grade, privacy-focused, and context-aware medical assistant built 
 ---
 ## Project Structure
 ```
-
 │
 ├── mainfile/                # Core application files
 │   ├── common/              # Shared utilities and helper functions
