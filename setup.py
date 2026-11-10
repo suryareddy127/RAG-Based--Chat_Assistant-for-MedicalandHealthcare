@@ -6,8 +6,8 @@ with open("requirements.txt") as f:
 setup(
     name="RAG Medical assistatnt",
     description="RAG Medical healthcare services assistant",
-    version="0.1",
-    author="Batch 04 - Final Project",
+    version="1.0",
+    author="Surya_reddy",
     packages=find_packages(),
     install_requires = requirements,
 )

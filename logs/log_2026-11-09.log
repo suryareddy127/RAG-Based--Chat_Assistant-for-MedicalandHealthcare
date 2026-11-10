@@ -340,3 +340,79 @@ ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
 2026-11-09 12:03:27,526 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2026-11-09 12:03:27,543 - INFO - 127.0.0.1 - - [09/Nov/2026 12:03:27] "[32mPOST / HTTP/1.1[0m" 302 -
 2026-11-09 12:03:27,562 - INFO - 127.0.0.1 - - [09/Nov/2026 12:03:27] "GET / HTTP/1.1" 200 -
+2026-11-09 12:27:30,400 - INFO - 127.0.0.1 - - [09/Nov/2026 12:27:30] "GET / HTTP/1.1" 200 -
+2026-11-09 12:27:53,940 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:27:54,005 - INFO - 127.0.0.1 - - [09/Nov/2026 12:27:54] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:27:54,020 - INFO - 127.0.0.1 - - [09/Nov/2026 12:27:54] "GET / HTTP/1.1" 200 -
+2026-11-09 12:28:21,430 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:28:21,439 - INFO - 127.0.0.1 - - [09/Nov/2026 12:28:21] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:28:21,446 - INFO - 127.0.0.1 - - [09/Nov/2026 12:28:21] "GET / HTTP/1.1" 200 -
+2026-11-09 12:28:57,284 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:28:57,290 - INFO - 127.0.0.1 - - [09/Nov/2026 12:28:57] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:28:57,297 - INFO - 127.0.0.1 - - [09/Nov/2026 12:28:57] "GET / HTTP/1.1" 200 -
+2026-11-09 12:29:17,865 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:29:17,867 - INFO - 127.0.0.1 - - [09/Nov/2026 12:29:17] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:29:17,877 - INFO - 127.0.0.1 - - [09/Nov/2026 12:29:17] "GET / HTTP/1.1" 200 -
+2026-11-09 12:38:46,961 - INFO - Loading vector store for context
+2026-11-09 12:38:47,035 - INFO - Loading FAISS vector store from disk.
+2026-11-09 12:38:47,036 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 12:39:30,458 - INFO - Use pytorch device_name: cpu
+2026-11-09 12:39:30,459 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 12:39:37,124 - INFO - HuggingFace Embeddings initialized successfully.
+2026-11-09 12:39:37,125 - INFO - FAISS database found at vectorstore/db_faiss. Loading...
+2026-11-09 12:39:37,205 - INFO - Loading faiss with AVX512 support.
+2026-11-09 12:39:37,206 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2026-11-09 12:39:37,206 - INFO - Loading faiss with AVX2 support.
+2026-11-09 12:39:38,675 - INFO - Successfully loaded faiss with AVX2 support.
+2026-11-09 12:39:39,095 - INFO - Loading LLM from Groq using model 'openai/gpt-oss-20b'...
+2026-11-09 12:39:44,871 - INFO - LLM loaded successfully from Groq.
+2026-11-09 12:39:44,955 - INFO - Successfully created the QA chain
+2026-11-09 12:39:47,234 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:40:23,288 - INFO - Loading vector store for context
+2026-11-09 12:40:23,288 - INFO - Loading FAISS vector store from disk.
+2026-11-09 12:40:23,289 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 12:40:35,772 - INFO - Use pytorch device_name: cpu
+2026-11-09 12:40:35,773 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 12:40:40,407 - INFO - HuggingFace Embeddings initialized successfully.
+2026-11-09 12:40:40,407 - INFO - FAISS database found at vectorstore/db_faiss. Loading...
+2026-11-09 12:40:40,417 - INFO - Loading faiss with AVX512 support.
+2026-11-09 12:40:40,417 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2026-11-09 12:40:40,417 - INFO - Loading faiss with AVX2 support.
+2026-11-09 12:40:40,580 - INFO - Successfully loaded faiss with AVX2 support.
+2026-11-09 12:40:40,768 - INFO - Loading LLM from Groq using model 'openai/gpt-oss-20b'...
+2026-11-09 12:40:43,321 - INFO - LLM loaded successfully from Groq.
+2026-11-09 12:40:43,322 - INFO - Successfully created the QA chain
+2026-11-09 12:40:44,385 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:41:06,156 - INFO - Loading vector store for context
+2026-11-09 12:41:06,156 - INFO - Loading FAISS vector store from disk.
+2026-11-09 12:41:06,156 - INFO - Initializing HuggingFace Embeddings.
+2026-11-09 12:41:11,384 - INFO - Use pytorch device_name: cpu
+2026-11-09 12:41:11,384 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2026-11-09 12:41:15,258 - INFO - HuggingFace Embeddings initialized successfully.
+2026-11-09 12:41:15,258 - INFO - FAISS database found at vectorstore/db_faiss. Loading...
+2026-11-09 12:41:15,262 - INFO - Loading faiss with AVX512 support.
+2026-11-09 12:41:15,262 - INFO - Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2026-11-09 12:41:15,262 - INFO - Loading faiss with AVX2 support.
+2026-11-09 12:41:15,283 - INFO - Successfully loaded faiss with AVX2 support.
+2026-11-09 12:41:15,332 - INFO - Loading LLM from Groq using model 'openai/gpt-oss-20b'...
+2026-11-09 12:41:16,252 - INFO - LLM loaded successfully from Groq.
+2026-11-09 12:41:16,253 - INFO - Successfully created the QA chain
+2026-11-09 12:41:17,122 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:41:17,817 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:41:42,186 - INFO - 127.0.0.1 - - [09/Nov/2026 12:41:42] "GET / HTTP/1.1" 200 -
+2026-11-09 12:41:42,281 - INFO - 127.0.0.1 - - [09/Nov/2026 12:41:42] "GET / HTTP/1.1" 200 -
+2026-11-09 12:41:42,374 - INFO - 127.0.0.1 - - [09/Nov/2026 12:41:42] "GET / HTTP/1.1" 200 -
+2026-11-09 12:46:35,216 - INFO - 127.0.0.1 - - [09/Nov/2026 12:46:35] "GET / HTTP/1.1" 200 -
+2026-11-09 12:46:42,514 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:46:42,527 - INFO - 127.0.0.1 - - [09/Nov/2026 12:46:42] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:46:42,541 - INFO - 127.0.0.1 - - [09/Nov/2026 12:46:42] "GET / HTTP/1.1" 200 -
+2026-11-09 12:46:48,988 - INFO - 127.0.0.1 - - [09/Nov/2026 12:46:48] "GET / HTTP/1.1" 200 -
+2026-11-09 12:47:05,299 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:47:05,305 - INFO - 127.0.0.1 - - [09/Nov/2026 12:47:05] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:47:05,321 - INFO - 127.0.0.1 - - [09/Nov/2026 12:47:05] "GET / HTTP/1.1" 200 -
+2026-11-09 12:48:08,913 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-09 12:48:08,923 - INFO - 127.0.0.1 - - [09/Nov/2026 12:48:08] "[32mPOST / HTTP/1.1[0m" 302 -
+2026-11-09 12:48:08,931 - INFO - 127.0.0.1 - - [09/Nov/2026 12:48:08] "GET / HTTP/1.1" 200 -
