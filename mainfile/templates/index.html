@@ -29,14 +29,67 @@
 
   <style>
     body { font-family: 'Lexend', sans-serif; }
+
+    /* Critical layout, declared in plain CSS on purpose.
+       The Tailwind Play CDN compiles h-screen / flex-1 / min-h-0 only after
+       this page has parsed, so relying on it alone leaves #chat-box
+       unscrollable at the moment the scroll script first runs. */
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; overflow: hidden; }
+    main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+    #chat-box { flex: 1 1 auto; min-height: 0; overflow-y: auto; scroll-behavior: auto; }
     .scrollbar::-webkit-scrollbar { width: 6px; }
     .scrollbar::-webkit-scrollbar-thumb {
       background: #2f4246; border-radius: 10px;
     }
+
+    /* Rendered markdown inside an assistant bubble */
+    .chat-md > *:first-child { margin-top: 0; }
+    .chat-md > *:last-child  { margin-bottom: 0; }
+    .chat-md p { margin: 0 0 0.75rem; }
+    .chat-md h1, .chat-md h2, .chat-md h3,
+    .chat-md h4, .chat-md h5, .chat-md h6 {
+      color: #13c8ec;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 1.1rem 0 0.5rem;
+    }
+    .chat-md h1 { font-size: 1.25rem; }
+    .chat-md h2 { font-size: 1.15rem; }
+    .chat-md h3 { font-size: 1.05rem; }
+    .chat-md h4, .chat-md h5, .chat-md h6 { font-size: 1rem; }
+    .chat-md strong, .chat-md b { color: #ffffff; font-weight: 700; }
+    .chat-md em, .chat-md i { font-style: italic; }
+    .chat-md ul, .chat-md ol { margin: 0 0 0.75rem; padding-left: 1.4rem; }
+    .chat-md ul { list-style: disc; }
+    .chat-md ol { list-style: decimal; }
+    .chat-md li { margin: 0.3rem 0; }
+    .chat-md li::marker { color: #13c8ec; }
+    .chat-md code {
+      background: #101f22; color: #8ae9ff;
+      padding: 0.1rem 0.35rem; border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.875em;
+    }
+    .chat-md pre {
+      background: #101f22; padding: 0.75rem; border-radius: 8px;
+      overflow-x: auto; margin: 0 0 0.75rem;
+    }
+    .chat-md pre code { background: none; padding: 0; }
+    .chat-md blockquote {
+      border-left: 3px solid #13c8ec;
+      padding-left: 0.75rem; margin: 0 0 0.75rem;
+      color: #cbd5e1;
+    }
+    .chat-md hr { border: 0; border-top: 1px solid #2f4246; margin: 0.9rem 0; }
+    .chat-md table { border-collapse: collapse; width: 100%; margin: 0 0 0.75rem; display: block; overflow-x: auto; }
+    .chat-md th, .chat-md td { border: 1px solid #2f4246; padding: 0.4rem 0.6rem; text-align: left; }
+    .chat-md th { background: #101f22; color: #13c8ec; }
+
   </style>
 </head>
 
-<body class="bg-bgDark min-h-screen flex flex-col">
+<body class="bg-bgDark h-screen overflow-hidden flex flex-col">
 
 <!-- Header -->
 <header class="border-b border-[#283639] px-6 py-4">
@@ -45,14 +98,14 @@
 </header>
 
 <!-- Main -->
-<main class="flex-1 max-w-4xl mx-auto w-full px-4 py-6 flex flex-col">
+<main class="flex-1 min-h-0 max-w-4xl mx-auto w-full px-4 py-6 flex flex-col">
 
   {% if error %}
     <div class="text-red-400 text-sm mb-2">{{ error }}</div>
   {% endif %}
 
   <!-- Chat Area -->
-  <div id="chat-box" class="flex-1 overflow-y-auto scrollbar space-y-6 p-4 bg-panelDark rounded-xl border border-[#283639]">
+  <div id="chat-box" class="flex-1 min-h-0 overflow-y-auto scrollbar space-y-6 p-4 bg-panelDark rounded-xl border border-[#283639]">
 
     {% for msg in messages %}
       {% if msg.role == 'assistant' %}
@@ -61,8 +114,8 @@
           <div class="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">AI</div>
           <div class="max-w-[80%]">
             <p class="text-xs text-slate-400 mb-1">MedAssist AI</p>
-            <div class="bg-bubbleDark text-white px-4 py-3 rounded-2xl rounded-bl-none leading-relaxed">
-              {{ msg.content | safe | nl2br }}
+            <div class="chat-md bg-bubbleDark text-white px-4 py-3 rounded-2xl rounded-bl-none leading-relaxed">
+              {{ msg.content | markdown }}
             </div>
           </div>
         </div>
@@ -72,7 +125,7 @@
           <div class="max-w-[80%] text-right">
             <p class="text-xs text-slate-400 mb-1">User</p>
             <div class="bg-primary text-black px-4 py-3 rounded-2xl rounded-br-none font-medium">
-              {{ msg.content | safe | nl2br }}
+              {{ msg.content | nl2br }}
             </div>
           </div>
           <div class="w-9 h-9 rounded-full bg-slate-600 flex items-center justify-center text-white font-bold">
@@ -112,17 +165,57 @@
 
 <!-- Footer -->
 <footer class="text-center text-xs text-slate-400 px-4 py-4">
-  For educational and awareness purposes only. Not for diagnosis or treatment.
+  For educational and awareness purposes only.
 </footer>
 
 <script>
-  const input = document.getElementById("prompt-textarea");
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      this.form.submit();
+(function () {
+  var chatBox = document.getElementById("chat-box");
+
+  if (chatBox) {
+    // Stay pinned to the newest message until the user scrolls up themselves.
+    var pinned = true;
+
+    function toBottom() {
+      if (pinned) chatBox.scrollTop = chatBox.scrollHeight;
     }
-  });
+
+    chatBox.addEventListener("scroll", function () {
+      var distanceFromBottom =
+        chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight;
+      pinned = distanceFromBottom < 40;
+    });
+
+    // The Tailwind CDN injects its CSS after this script runs, and the Lexend
+    // webfont reflows the bubbles again later. Each of these is a point where
+    // the box can become taller, so re-pin at every one of them.
+    toBottom();
+    document.addEventListener("DOMContentLoaded", toBottom);
+    window.addEventListener("load", toBottom);
+    window.addEventListener("resize", toBottom);
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(toBottom);
+    }
+    if (window.ResizeObserver) {
+      new ResizeObserver(toBottom).observe(chatBox);
+    }
+    [0, 60, 150, 300, 600, 1000].forEach(function (d) {
+      window.setTimeout(toBottom, d);
+    });
+  }
+
+  var input = document.getElementById("prompt-textarea");
+  if (input) {
+    input.focus();
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        this.form.submit();
+      }
+    });
+  }
+})();
 </script>
 
 </body>

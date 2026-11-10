@@ -9,11 +9,38 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-from markupsafe import Markup
-def nl2br(value):
-    return Markup(str(value).replace("\n", "<br>\n"))
+# Flask only auto-reloads templates when debug is on, so with debug=False a
+# running server keeps serving the index.html it cached at startup. Enable it
+# explicitly so front-end edits show up without a restart.
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.jinja_env.auto_reload = True
 
-app.jinja_env.filters['nl2br'] = nl2br
+import bleach
+import markdown as md
+from markupsafe import Markup, escape
+
+# Tags the assistant is allowed to emit. Anything else the model produces is
+# stripped, and user text is never treated as markup at all.
+_ALLOWED_TAGS = [
+    "p", "br", "strong", "em", "b", "i", "u", "code", "pre", "blockquote",
+    "ul", "ol", "li", "h1", "h2", "h3", "h4", "h5", "h6", "hr",
+    "table", "thead", "tbody", "tr", "th", "td",
+]
+
+
+def render_markdown(value):
+    """Render assistant markdown to sanitised HTML for the chat bubble."""
+    html = md.markdown(str(value), extensions=["extra", "sane_lists", "nl2br"])
+    return Markup(bleach.clean(html, tags=_ALLOWED_TAGS, attributes={}, strip=True))
+
+
+def nl2br(value):
+    """Plain-text rendering for user messages - escape first, then keep newlines."""
+    return Markup(str(escape(value)).replace(chr(10), "<br>" + chr(10)))
+
+
+app.jinja_env.filters["markdown"] = render_markdown
+app.jinja_env.filters["nl2br"] = nl2br
 
 @app.route("/", methods=["GET", "POST"])
 def index():
