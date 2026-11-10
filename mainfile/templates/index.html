@@ -86,6 +86,25 @@
     .chat-md th, .chat-md td { border: 1px solid #2f4246; padding: 0.4rem 0.6rem; text-align: left; }
     .chat-md th { background: #101f22; color: #13c8ec; }
 
+    /* Retrieved figures */
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid #2f4246;
+    }
+    .med-figure { margin: 0; background: #101f22; border: 1px solid #2f4246;
+                  border-radius: 10px; overflow: hidden; }
+    .med-figure img {
+      display: block; width: 100%; height: 190px; object-fit: contain;
+      background: #0b1619; cursor: zoom-in;
+    }
+    .med-figure figcaption { padding: 0.6rem 0.7rem; font-size: 0.8rem; line-height: 1.45; }
+    .fig-caption { display: block; color: #e2e8f0; font-weight: 600; margin-bottom: 0.35rem; }
+    .fig-explain { display: block; color: #cbd5e1; margin-bottom: 0.35rem; }
+    .fig-source  { display: block; color: #64748b; font-size: 0.72rem; }
   </style>
 </head>
 
@@ -116,6 +135,28 @@
             <p class="text-xs text-slate-400 mb-1">MedAssist AI</p>
             <div class="chat-md bg-bubbleDark text-white px-4 py-3 rounded-2xl rounded-bl-none leading-relaxed">
               {{ msg.content | markdown }}
+
+              {% if msg.figures %}
+                <div class="figure-grid">
+                  {% for fig in msg.figures %}
+                    <figure class="med-figure">
+                      <a href="{{ url_for('figure', figure_id=fig.id) }}" target="_blank" rel="noopener">
+                        <img src="{{ url_for('figure', figure_id=fig.id) }}"
+                             alt="{{ fig.caption }}" loading="lazy"/>
+                      </a>
+                      <figcaption>
+                        {% if fig.caption %}
+                          <span class="fig-caption">{{ fig.caption }}</span>
+                        {% endif %}
+                        {% if fig.explanation %}
+                          <span class="fig-explain">{{ fig.explanation }}</span>
+                        {% endif %}
+                        <span class="fig-source">Gale Encyclopedia of Medicine, p.{{ fig.page }}</span>
+                      </figcaption>
+                    </figure>
+                  {% endfor %}
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>

@@ -36,3 +36,32 @@ CHAT_STORE_THRESHOLD = int(os.environ.get("CHAT_STORE_THRESHOLD", "500"))
 CHAT_TTL_SECONDS = int(os.environ.get("CHAT_TTL_SECONDS", str(7 * 24 * 3600)))
 # Most recent messages retained per chat (user + assistant each count as one).
 MAX_HISTORY_MESSAGES = int(os.environ.get("MAX_HISTORY_MESSAGES", "50"))
+
+# --- Multimodal (image) retrieval ----------------------------------------
+FIGURES_DIR = os.environ.get("FIGURES_DIR", "data/figures")
+FIGURES_META = os.path.join(FIGURES_DIR, "figures.json")
+IMAGE_DB_PATH = os.environ.get("IMAGE_DB_PATH", "vectorstore/db_images")
+CAPTION_DB_PATH = os.environ.get("CAPTION_DB_PATH", "vectorstore/db_captions")
+
+# CLIP puts images and text in one space, so a text question can be matched
+# directly against figure pixels.
+CLIP_MODEL_NAME = os.environ.get("CLIP_MODEL_NAME", "openai/clip-vit-base-patch32")
+
+# Skip logos/rules/decorative strips when harvesting figures.
+MIN_IMAGE_WIDTH = int(os.environ.get("MIN_IMAGE_WIDTH", "150"))
+MIN_IMAGE_HEIGHT = int(os.environ.get("MIN_IMAGE_HEIGHT", "150"))
+
+# How many figures to show, and how relevant one must be to appear at all.
+IMAGE_TOP_K = int(os.environ.get("IMAGE_TOP_K", "2"))
+# Calibrated on this corpus: relevant figures score 0.30+, medical questions
+# with no matching figure ~0.26, non-medical ~0.21. 0.28 separates them.
+IMAGE_MIN_SCORE = float(os.environ.get("IMAGE_MIN_SCORE", "0.28"))
+IMAGE_CANDIDATES = int(os.environ.get("IMAGE_CANDIDATES", "8"))
+
+# Groq model that can actually see an image. Verified vision-capable.
+VISION_MODEL_NAME = os.environ.get("VISION_MODEL_NAME", "qwen/qwen3.8-27b")
+VISION_MAX_TOKENS = int(os.environ.get("VISION_MAX_TOKENS", "320"))
+
+# Conversational memory: prior turns fed to the question condenser.
+HISTORY_TURNS = int(os.environ.get("HISTORY_TURNS", "6"))
+

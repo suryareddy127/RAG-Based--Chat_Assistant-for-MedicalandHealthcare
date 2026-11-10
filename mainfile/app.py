@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import (Flask, abort, render_template, request, session, redirect,
+                   send_from_directory, url_for)
 from flask_session import Session
 from cachelib.file import FileSystemCache
 
-from mainfile.components.retreive import create_qa_chain
+from mainfile.components.retreive import answer_question
 from mainfile.common.chat_store import (
     append_message,
     clear_messages,
@@ -10,8 +11,10 @@ from mainfile.common.chat_store import (
     new_chat_id,
 )
 from mainfile.common.logger import get_logger
+from mainfile.components.document_loader import load_manifest
 from mainfile.config.config import (
     CHAT_STORE_THRESHOLD,
+    FIGURES_DIR,
     CHAT_TTL_SECONDS,
     SECRET_KEY,
     SESSION_STORE_DIR,
@@ -101,14 +104,15 @@ def index():
         user_input = request.form.get("prompt")
 
         if user_input:
+            history = get_messages(chat_id)
             append_message(chat_id, "user", user_input)
 
             try:
-                qa_chain = create_qa_chain()
-                if qa_chain is None:
-                    raise Exception("QA chain could not be created")
-
-                append_message(chat_id, "assistant", str(qa_chain.invoke(user_input)))
+                # History is read before the new turn is appended, so the
+                # condenser sees the prior conversation, not the question twice.
+                result = answer_question(user_input, history)
+                append_message(chat_id, "assistant", result["answer"],
+                               figures=result.get("figures"))
 
             except Exception as e:
                 logger.error(f"Failed to answer question: {e}")
@@ -117,6 +121,19 @@ def index():
         return redirect(url_for("index"))
 
     return render_template("index.html", messages=get_messages(chat_id))
+
+
+@app.route("/figure/<figure_id>")
+def figure(figure_id):
+    """Serve an extracted figure.
+
+    The id is matched against the manifest rather than used as a path, so a
+    crafted id cannot escape the figures directory.
+    """
+    entry = next((f for f in load_manifest() if f["id"] == figure_id), None)
+    if entry is None:
+        abort(404)
+    return send_from_directory(os.path.abspath(FIGURES_DIR), entry["file"])
 
 
 @app.route("/clear")
